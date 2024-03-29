@@ -1,0 +1,13 @@
+.wrapper {
+  padding: 0 ;
+}
+
+.label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+.editor {
+  margin-top: 1.6rem;
+  margin-bottom: 3.6rem;
+  height: 300px;
+}

@@ -7,9 +7,9 @@ import QuillEditor from 'react-quill'
 import styles from './styles.module.css'
 import 'react-quill/dist/quill.snow.css'
 
-const Editor = () => {
+const TextEditor = ({ onChnageHandler, value }) => {
   // Editor state
-  const [value, setValue] = useState('')
+  // const [value, setValue] = useState('')
 
   return (
     <div className={`${styles.wrapper} relative`}>
@@ -17,10 +17,10 @@ const Editor = () => {
         className={styles.editor}
         theme="snow"
         value={value}
-        onChange={(value) => setValue(value)}
+        onChange={(value) => onChnageHandler(value)}
       />
     </div>
   )
 }
 
-export default Editor
+export default TextEditor

@@ -31,7 +31,7 @@ api_request.interceptors.response.use(
     if (error.response && error.response.status === 403) {
       console.log(error)
       localStorage.removeItem('authTokens')
-      window.location.href = '/auth?e=authTokens'
+      window.location.href = '/?e=authTokens'
     }
     if (error.response && error.response.status === 404) {
     }

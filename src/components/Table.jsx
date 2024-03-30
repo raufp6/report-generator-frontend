@@ -1,79 +1,29 @@
+import { useState, useEffect } from 'react'
 import { Card, Typography } from '@material-tailwind/react'
-import { Button } from '@material-tailwind/react'
-import Modal from './Modal'
-import { useState } from 'react'
 
-const TABLE_HEAD = ['Name', 'Job', 'Employed', '']
+import { getData } from '../services/Api'
+import { getReportsUrl } from '../services/ApiUrl'
+import { errorNotify } from '../utils/toastUtils'
 
-const TABLE_ROWS = [
-  {
-    name: 'John Michael',
-    job: 'Manager',
-    date: '23/04/18',
-  },
-  {
-    name: 'Alexa Liras',
-    job: 'Developer',
-    date: '23/04/18',
-  },
-  {
-    name: 'Laurent Perrier',
-    job: 'Executive',
-    date: '19/09/17',
-  },
-  {
-    name: 'Michael Levi',
-    job: 'Developer',
-    date: '24/12/08',
-  },
-  {
-    name: 'Richard Gran',
-    job: 'Manager',
-    date: '04/10/21',
-  },
-  {
-    name: 'Richard Gran',
-    job: 'Manager',
-    date: '04/10/21',
-  },
-  {
-    name: 'Richard Gran',
-    job: 'Manager',
-    date: '04/10/21',
-  },
-  {
-    name: 'Richard Gran',
-    job: 'Manager',
-    date: '04/10/21',
-  },
-  {
-    name: 'Richard Gran',
-    job: 'Manager',
-    date: '04/10/21',
-  },
-  {
-    name: 'Richard Gran',
-    job: 'Manager',
-    date: '04/10/21',
-  },
-  {
-    name: 'Richard Gran',
-    job: 'Manager',
-    date: '04/10/21',
-  },
-  {
-    name: 'Richard Gran',
-    job: 'Manager',
-    date: '04/10/21',
-  },
-]
+const TABLE_HEAD = ['Client Name', 'Patient Name', 'Created at', '']
 
 function DefaultTable() {
-  
+  const [reports, setReports] = useState()
+  const fetchAllReports = async (url) => {
+    try {
+      const reportData = await getData([], url)
+      setReports(reportData)
+    } catch (error) {
+      errorNotify(error)
+    }
+  }
+  useEffect(() => {
+    fetchAllReports(getReportsUrl)
+  }, [])
+
   return (
     <>
       <Card className="h-full w-full overflow-scroll">
-        
         <table className="w-full min-w-max table-auto text-left">
           <thead>
             <tr>
@@ -94,59 +44,79 @@ function DefaultTable() {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(({ name, job, date }, index) => {
-              const isLast = index === TABLE_ROWS.length - 1
-              const classes = isLast
-                ? 'p-4'
-                : 'p-4 border-b border-blue-gray-50'
+            {reports?.map(
+              (
+                {
+                  client_name,
+                  patient_first_name,
+                  patient_last_name,
+                  report_pdf_file,
+                  created_at,
+                },
+                index
+              ) => {
+                const isLast = index === reports.length - 1
+                const classes = isLast
+                  ? 'p-4'
+                  : 'p-4 border-b border-blue-gray-50'
 
-              return (
-                <tr key={name}>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {name}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {job}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {date}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      as="a"
-                      href="#"
-                      variant="small"
-                      color="blue-gray"
-                      className="font-medium"
-                    >
-                      Edit
-                    </Typography>
-                  </td>
-                </tr>
-              )
-            })}
+                return (
+                  <tr key={index}>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {client_name}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {patient_first_name + patient_last_name}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {created_at}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        as="a"
+                        href="#"
+                        variant="small"
+                        color="blue-gray"
+                        className="font-medium"
+                      >
+                        <a
+                          href={
+                            import.meta.env.VITE_BACKEND_URL +
+                            'uploads/reports/' +
+                            report_pdf_file
+                          }
+                          target="_blank"
+                          download
+                        >
+                          Download
+                        </a>
+                      </Typography>
+                    </td>
+                  </tr>
+                )
+              }
+            )}
           </tbody>
         </table>
       </Card>
-      
     </>
   )
 }

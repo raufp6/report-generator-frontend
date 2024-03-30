@@ -8,9 +8,9 @@ const Login = () => {
   const navigate = useNavigate()
   
   const user = JSON.parse(localStorage.getItem('authTokens'))
-  if (user) {
-    return navigate('/account')
-  }
+//   if (user) {
+//     return navigate('/account')
+//   }
   return (
     <div className="flex items-center h-screen w-full ">
       <div className="w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">

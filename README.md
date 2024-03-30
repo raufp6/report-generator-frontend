@@ -1,4 +1,4 @@
-# PDF Generator Web Application
+# PDF Report Generator Web Application
 
 Description
 
@@ -7,6 +7,11 @@ This project is a web application that allows users to generate PDF documents wi
 # Live URL
 
 The live version of this application is available at https://report-generator-frontend.vercel.app/
+
+# Demo Credentials
+username: admin
+
+password: admin
 
 # Features
 
@@ -20,7 +25,7 @@ The live version of this application is available at https://report-generator-fr
     Clone the repository.
     Navigate to the backend directory and install the Django dependencies.
 
-    
+Backend Repo https://github.com/raufp6/report-generator
 
 ```
 pip install -r requirements.txt

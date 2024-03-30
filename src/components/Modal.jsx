@@ -12,33 +12,33 @@ let reportSchema = yup.object().shape({
   physician_name: yup.string().required(),
   patient_first_name: yup.string().required(),
   patient_last_name: yup.string().required(),
-  // patient_contact: yup
-  //   .string()
-  //   .matches(/^[0-9]+$/, 'Patient Contact Must be only digits')
-  //   .min(10, 'Patient Contact Must be exactly 10 digits')
-  //   .max(13, 'Patient Contact Must be exactly 10 digits')
-  //   .required('Patient Contact number is required'),
+  patient_contact: yup
+    .string()
+    .matches(/^[0-9]+$/, 'Patient Contact Must be only digits')
+    .min(10, 'Patient Contact Must be exactly 10 digits')
+    .max(13, 'Patient Contact Must be exactly 10 digits')
+    .required('Patient Contact number is required'),
 
-  // physician_contact: yup
-  //   .string()
-  //   .matches(/^[0-9]+$/, 'Physician Contact Must be only digits')
-  //   .min(10, 'Physician Contact Must be exactly 10 digits')
-  //   .max(13, 'Physician Contact Must be exactly 10 digits')
-  //   .required('Physician Contact number is required'),
+  physician_contact: yup
+    .string()
+    .matches(/^[0-9]+$/, 'Physician Contact Must be only digits')
+    .min(10, 'Physician Contact Must be exactly 10 digits')
+    .max(13, 'Physician Contact Must be exactly 10 digits')
+    .required('Physician Contact number is required'),
 
-  // logo: yup
-  //   .mixed()
-  //   .required('Logo field is required')
-  //   .test(
-  //     'fileSize',
-  //     'File size too large',
-  //     (value) => value && value.size <= (1024 * 1024) / 2 // 1 MB
-  //   )
-  //   .test(
-  //     'fileFormat',
-  //     'Unsupported file format',
-  //     (value) => value && ['image/jpeg', 'image/png'].includes(value.type)
-  //   ),
+  logo: yup
+    .mixed()
+    .required('Logo field is required')
+    .test(
+      'fileSize',
+      'File size too large',
+      (value) => value && value.size <= (1024 * 1024) / 2 // 1 MB
+    )
+    .test(
+      'fileFormat',
+      'Unsupported file format',
+      (value) => value && ['image/jpeg', 'image/png'].includes(value.type)
+    ),
   patient_dob: yup
     .date()
     .max(new Date(), 'Date of birth cannot be in the future')
@@ -203,7 +203,7 @@ const Modal = ({ onCloseClickHandle }) => {
                     htmlFor="patient_last_name"
                     className="block text-gray-700 font-bold mb-2 float-left"
                   >
-                    Patient First Name:
+                    Patient Last Name:
                   </label>
                   <input
                     type="text"
@@ -259,7 +259,7 @@ const Modal = ({ onCloseClickHandle }) => {
               <div className="flex flex-col clear-both">
                 <div className="mb-1">
                   <h6 className="block mb-2 font-sans text-base font-semibold float-left">
-                    Consultatio Note
+                    Consultation Note
                   </h6>
 
                   <TextEditor

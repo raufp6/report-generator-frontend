@@ -5,5 +5,5 @@ import tailwindcss from 'tailwindcss'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: import.meta.env.VITE_BACKEND_URL,
+  base: 'https://report-generator-frontend.vercel.app/',
 })

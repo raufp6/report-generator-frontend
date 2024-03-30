@@ -1,8 +1,61 @@
-# React + Vite
+# PDF Generator Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Description
 
-Currently, two official plugins are available:
+This project is a web application that allows users to generate PDF documents with custom content. Users can log in, fill out a form with data, and generate a PDF document based on the entered information. The application is built using React for the frontend and Django for the backend. It utilizes PostgreSQL as the database for storing user data, JWT for user authentication, and xhtml2pdf for generating PDFs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Live URL
+
+The live version of this application is available at https://report-generator-frontend.vercel.app/
+
+# Features
+
+    User authentication with JWT
+    Form for entering data to generate PDF Report
+    Dynamic PDF generation based on user input
+    Downloadable PDF documents
+
+# Installation
+
+    Clone the repository.
+    Navigate to the backend directory and install the Django dependencies.
+
+    
+
+```
+pip install -r requirements.txt
+```
+
+Set up the PostgreSQL database and configure the database settings in .env.
+Migrate the database.
+
+
+```
+python manage.py migrate
+```
+
+Navigate to the frontend directory and install the React dependencies.
+
+Add API URL in .env
+
+VITE_APP_API_URL=http://localhost:8000/api/
+VITE_BACKEND_URL=http://localhost:8000/
+
+
+
+```
+npm install
+```
+
+Start the backend server.
+
+```
+python manage.py runserver
+```
+
+Start the frontend server.
+
+```
+    npm start
+```
+

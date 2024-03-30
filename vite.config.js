@@ -5,5 +5,5 @@ import tailwindcss from 'tailwindcss'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: 'http://localhost:5173/',
+  base: import.meta.env.VITE_BACKEND_URL,
 })

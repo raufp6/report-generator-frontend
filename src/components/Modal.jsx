@@ -101,7 +101,7 @@ const Modal = ({ onCloseClickHandle }) => {
           })
         })
     } catch (errors) {
-      console.log(errors)
+      
       const errorMessages = errors.inner.map((error) => error.message)
 
       for (let index = 0; index < errorMessages.length; index++) {
@@ -110,9 +110,17 @@ const Modal = ({ onCloseClickHandle }) => {
     }
   }
   const onChangeHandleConsultationNote = (val) => {
+    if (val.length > 5000){
+      errorNotify(
+        'Exceeded maximum allowed character length of Consultation Note'
+      )
+    } 
     setCounsultationNote(val)
   }
   const onChangeHandleChiefComplaint = (val) => {
+    if (val.length > 5000) {
+      errorNotify('Exceeded maximum allowed character length of Chief Complaint')
+    } 
     setChiefComplaint(val)
   }
 
